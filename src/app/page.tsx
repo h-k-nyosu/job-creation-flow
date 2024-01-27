@@ -1,22 +1,27 @@
+import pageContents from "../data/pageContents";
 import ContentSection from "./components/ContentSection";
 
 export default function Home() {
-  const title = "タイトル";
-  const description = "ここに説明を記入します。";
-  const tags = ["タグ1", "タグ2", "タグ3"];
-  const showInputField = true; // この値を変更して入力フィールドの表示を制御
-  const pageNumber = 1; // この値を変更してページ番号を制御
+  // URLからpageNumberを取得するロジックを追加するか、
+  // あるいはprops経由で渡すなどして、pageNumberを決定します。
+  const pageNumber = 1; // 例として1を使用
+
+  // pageNumberに基づいて現在のページコンテンツを取得
+  const currentPageContent = pageContents.find(
+    (page) => page.pageNumber === pageNumber
+  );
 
   return (
-    <main className="container mx-auto p-8 bg-white text-gray-800 min-h-screen w-full relative">
-      <ContentSection
-        title={title}
-        description={description}
-        tags={tags}
-        showInputField={showInputField}
-        pageNumber={pageNumber}
-      />
-      {/* その他のコンテンツ */}
+    <main className="container mx-auto p-8 bg-white text-gray-800 min-h-screen w-1/2 relative">
+      {currentPageContent && (
+        <ContentSection
+          title={currentPageContent.title}
+          description={currentPageContent.description}
+          tags={currentPageContent.tags}
+          showInputField={currentPageContent.showInputField}
+          pageNumber={currentPageContent.pageNumber}
+        />
+      )}
     </main>
   );
 }
