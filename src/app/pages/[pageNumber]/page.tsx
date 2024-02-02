@@ -33,6 +33,7 @@ export default function Page() {
           title={currentPageContent.title}
           description={currentPageContent.description}
           tags={currentPageContent.tags}
+          multiSelectTags={currentPageContent.multiSelectTags}
           showInputField={currentPageContent.showInputField}
           // pageNumberは1を足してユーザーに表示します。
           pageNumber={pageIndex + 1}

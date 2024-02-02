@@ -7,6 +7,7 @@ type ContentSectionProps = {
   title: string;
   description: string;
   tags: string[];
+  multiSelectTags: boolean;
   showInputField: boolean;
   pageNumber: number;
 };
@@ -15,6 +16,7 @@ const ContentSection: React.FC<ContentSectionProps> = ({
   title,
   description,
   tags,
+  multiSelectTags,
   showInputField,
   pageNumber,
 }) => {
@@ -22,10 +24,14 @@ const ContentSection: React.FC<ContentSectionProps> = ({
 
   const handleTagClick = (tag: string) => {
     setSelectedTags((prevSelectedTags) => {
-      if (prevSelectedTags.includes(tag)) {
-        return prevSelectedTags.filter((t) => t !== tag);
+      if (multiSelectTags) {
+        if (prevSelectedTags.includes(tag)) {
+          return prevSelectedTags.filter((t) => t !== tag);
+        } else {
+          return [...prevSelectedTags, tag];
+        }
       } else {
-        return [...prevSelectedTags, tag];
+        return prevSelectedTags.includes(tag) ? [] : [tag];
       }
     });
   };
